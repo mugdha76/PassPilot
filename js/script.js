@@ -146,51 +146,53 @@ function updateRequirement(element, passed){
 
 function detectPattern(password){
 
+    let warnings = [];
+
     const repeatedPattern = /(.)\1{2,}/;
     const sequentialPattern = /123|234|345|456|567|678|789|abc|bcd|cde|def|qwerty|asdf|zxcv/i;
 
     if(repeatedPattern.test(password)){
-        return "Repeated characters detected.";
+        warnings.push("Repeated characters detected.");
     }
 
     if(sequentialPattern.test(password)){
-        return "Predictable sequence detected.";
+        warnings.push("Predictable sequence detected.");
     }
 
-    return null;
+    return warnings;
 
 }
 function updateAnalysis(password){
 
-    analysisList.innerHTML = "";
-    if(isCommonPassword(password)){
+        analysisList.innerHTML = "";
+        if(isCommonPassword(password)){
+
+                const li = document.createElement("li");
+
+                li.textContent =
+                "🚨 This is a commonly used password.";
+
+                analysisList.appendChild(li);
+
+            }
+        const warnings = detectPattern(password);
+
+        warnings.forEach(warning => {
 
             const li = document.createElement("li");
 
-            li.textContent =
-            "🚨 This is a commonly used password.";
+            li.textContent = "⚠ " + warning;
 
             analysisList.appendChild(li);
 
-        }
-         const pattern = detectPattern(password);
-
-    if(pattern){
+        });
+        if(analysisList.children.length === 0){
 
         const li = document.createElement("li");
 
-        li.textContent = "⚠ " + pattern;
+        li.textContent = "✅ No obvious weaknesses detected.";
 
         analysisList.appendChild(li);
 
     }
-    if(analysisList.children.length === 0){
-
-    const li = document.createElement("li");
-
-    li.textContent = "✅ No obvious weaknesses detected.";
-
-    analysisList.appendChild(li);
-
-}
 }
