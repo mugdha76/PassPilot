@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassPilot</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <h1>PassPilot</h1>
+            <p>Your Personal Password Security Assistant</p>
+        </header>
+
+        <!-- Password Input Section -->
+        <section class="password-section">
+
+            <label for="password">Password</label>
+
+            <div class="input-wrapper">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="off"
+                >
+
+                <button id="togglePassword" type="button">
+                    Show
+                </button>
+            </div>
+
+        </section>
+
+        <!-- Strength Section -->
+        <section class="strength-section">
+
+            <div class="strength-bar">
+                <div id="strength-fill"></div>
+            </div>
+
+            <div class="strength-info">
+                <p>Score: <span id="score">0</span>/100</p>
+                <p>Strength: <span id="strength-text">-</span></p>
+            </div>
+
+        </section>
+
+        <!-- Requirements -->
+        <section class="requirements-section">
+
+            <h2>Password Requirements</h2>
+
+            <ul id="requirements-list">
+
+                <li id="length">❌ At least 12 characters</li>
+
+                <li id="uppercase">❌ One uppercase letter</li>
+
+                <li id="lowercase">❌ One lowercase letter</li>
+
+                <li id="number">❌ One number</li>
+
+                <li id="symbol">❌ One special character</li>
+
+            </ul>
+
+        </section>
+
+        <!-- Explain Score -->
+        <section class="analysis-section">
+
+            <h2>Why this score?</h2>
+
+            <ul id="analysis-list">
+                <li>Start typing to analyze your password.</li>
+            </ul>
+
+        </section>
+
+        <!-- Password Generator -->
+        <section class="generator-section">
+
+            <button id="generatePassword">
+                Generate Secure Password
+            </button>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
