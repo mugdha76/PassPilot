@@ -35,16 +35,8 @@ togglePassword.addEventListener("click", () => {
 // Listen for typing/input listener
 passwordInput.addEventListener("input", () => {
 
-    const password = passwordInput.value;
+    updatePasswordAnalysis(passwordInput.value);
 
-    checkRequirements(password);
-
-    const score = calculateScore(password);
-
-    scoreText.textContent = score;
-
-    updateStrength(score);
-    updateAnalysis(password);
 });
 // Check Requirements
 function checkRequirements(password){
@@ -211,4 +203,54 @@ function updateAnalysis(password){
         analysisList.appendChild(li);
 
     }
+}
+function generatePassword(){
+
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercase = "abcdefghijklmnopqrstuvwxyz";
+    const numbers = "0123456789";
+    const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+    const allCharacters =
+        uppercase +
+        lowercase +
+        numbers +
+        symbols;
+
+    let password = "";
+
+    for(let i = 0; i < 16; i++){
+
+        const randomIndex = Math.floor(
+            Math.random() * allCharacters.length
+        );
+
+        password += allCharacters[randomIndex];
+
+    }
+
+    return password;
+
+}
+generateButton.addEventListener("click", () => {
+
+    const password = generatePassword();
+
+    passwordInput.value = password;
+
+    updatePasswordAnalysis(password);
+
+});
+function updatePasswordAnalysis(password){
+
+    checkRequirements(password);
+
+    const score = calculateScore(password);
+
+    scoreText.textContent = score;
+
+    updateStrength(score);
+
+    updateAnalysis(password);
+
 }
