@@ -44,7 +44,11 @@ passwordInput.addEventListener("input", () => {
     scoreText.textContent = score;
 
     updateStrength(score);
-
+     if (isCommonPassword(password)) {
+        analysisList.innerHTML =
+            "<li>🚨 This is a commonly used password. Choose a more unique password.</li>";
+    }
+    
 });
 // Check Requirements
 function checkRequirements(password){
@@ -122,7 +126,11 @@ function updateStrength(score){
     strengthFill.style.backgroundColor = color;
 
 }
+function isCommonPassword(password){
 
+    return commonPasswords.includes(password.toLowerCase());
+
+}
 // Update the Checklist
 function updateRequirement(element, passed){
 
