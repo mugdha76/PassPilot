@@ -85,6 +85,22 @@ function calculateScore(password){
     if(password.length >= 16)
         score += 15;
 
+    /* ---------- Penalties ---------- */
+
+    if(isCommonPassword(password)){
+        score -= 40;
+    }
+
+    const warnings = detectPattern(password);
+
+    score -= warnings.length * 20;
+
+    /* Prevent negative score */
+
+    if(score < 0){
+        score = 0;
+    }
+
     return score;
 
 }
