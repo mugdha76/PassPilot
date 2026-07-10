@@ -219,17 +219,38 @@ function generatePassword(){
 
     let password = "";
 
-    for(let i = 0; i < 16; i++){
+    // Guarantee one of each
+    password += uppercase[Math.floor(Math.random() * uppercase.length)];
+    password += lowercase[Math.floor(Math.random() * lowercase.length)];
+    password += numbers[Math.floor(Math.random() * numbers.length)];
+    password += symbols[Math.floor(Math.random() * symbols.length)];
 
-        const randomIndex = Math.floor(
-            Math.random() * allCharacters.length
-        );
+    // Fill the remaining characters
+    for(let i = 4; i < 16; i++){
+
+        const randomIndex =
+            Math.floor(Math.random() * allCharacters.length);
 
         password += allCharacters[randomIndex];
 
     }
 
-    return password;
+    return shufflePassword(password);
+
+}
+function shufflePassword(password){
+
+    const array = password.split("");
+
+    for(let i = array.length - 1; i > 0; i--){
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] = [array[j], array[i]];
+
+    }
+
+    return array.join("");
 
 }
 generateButton.addEventListener("click", () => {
