@@ -44,15 +44,7 @@ passwordInput.addEventListener("input", () => {
     scoreText.textContent = score;
 
     updateStrength(score);
-     if (isCommonPassword(password)) {
-        analysisList.innerHTML =
-            "<li>🚨 This is a commonly used password. Choose a more unique password.</li>";
-    }
-    const pattern = detectPattern(password);
-
-    if(pattern){
-        analysisList.innerHTML += `<li>⚠ ${pattern}</li>`;
-    }
+    updateAnalysis(password);
 });
 // Check Requirements
 function checkRequirements(password){
@@ -167,4 +159,38 @@ function detectPattern(password){
 
     return null;
 
+}
+function updateAnalysis(password){
+
+    analysisList.innerHTML = "";
+    if(isCommonPassword(password)){
+
+            const li = document.createElement("li");
+
+            li.textContent =
+            "🚨 This is a commonly used password.";
+
+            analysisList.appendChild(li);
+
+        }
+         const pattern = detectPattern(password);
+
+    if(pattern){
+
+        const li = document.createElement("li");
+
+        li.textContent = "⚠ " + pattern;
+
+        analysisList.appendChild(li);
+
+    }
+    if(analysisList.children.length === 0){
+
+    const li = document.createElement("li");
+
+    li.textContent = "✅ No obvious weaknesses detected.";
+
+    analysisList.appendChild(li);
+
+}
 }
