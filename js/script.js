@@ -43,6 +43,8 @@ passwordInput.addEventListener("input", () => {
 
     scoreText.textContent = score;
 
+    updateStrength(score);
+
 });
 // Check Requirements
 function checkRequirements(password){
@@ -84,6 +86,40 @@ function calculateScore(password){
         score += 15;
 
     return score;
+
+}
+
+function updateStrength(score){
+
+    let strength = "";
+    let color = "";
+
+    if(score < 30){
+        strength = "Very Weak";
+        color = "#dc2626";
+    }
+    else if(score < 50){
+        strength = "Weak";
+        color = "#ea580c";
+    }
+    else if(score < 70){
+        strength = "Fair";
+        color = "#ca8a04";
+    }
+    else if(score < 90){
+        strength = "Strong";
+        color = "#16a34a";
+    }
+    else{
+        strength = "Excellent";
+        color = "#15803d";
+    }
+
+    strengthText.textContent = strength;
+    strengthText.style.color = color;
+
+    strengthFill.style.width = score + "%";
+    strengthFill.style.backgroundColor = color;
 
 }
 
