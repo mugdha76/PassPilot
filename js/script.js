@@ -32,12 +32,16 @@ togglePassword.addEventListener("click", () => {
 
 });
 
-// Listen for typing
+// Listen for typing/input listener
 passwordInput.addEventListener("input", () => {
 
     const password = passwordInput.value;
 
     checkRequirements(password);
+
+    const score = calculateScore(password);
+
+    scoreText.textContent = score;
 
 });
 // Check Requirements
@@ -54,6 +58,32 @@ function checkRequirements(password){
     updateRequirement(lowerItem, hasLower);
     updateRequirement(numberItem, hasNumber);
     updateRequirement(symbolItem, hasSymbol);
+
+}
+
+function calculateScore(password){
+
+    let score = 0;
+
+    if(password.length >= 12)
+        score += 25;
+
+    if(/[A-Z]/.test(password))
+        score += 15;
+
+    if(/[a-z]/.test(password))
+        score += 15;
+
+    if(/[0-9]/.test(password))
+        score += 15;
+
+    if(/[^A-Za-z0-9]/.test(password))
+        score += 15;
+
+    if(password.length >= 16)
+        score += 15;
+
+    return score;
 
 }
 
