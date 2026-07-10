@@ -188,3 +188,18 @@ li{
 
     background:#15803d;
 }
+#copyPassword{
+
+    background:#475569;
+
+    color:white;
+
+    padding:0 18px;
+
+}
+
+#copyPassword:hover{
+
+    background:#334155;
+
+}

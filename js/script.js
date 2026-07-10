@@ -1,7 +1,7 @@
 // Select the elements
 const passwordInput = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
-
+const copyButton = document.getElementById("copyPassword");
 const strengthFill = document.getElementById("strength-fill");
 const scoreText = document.getElementById("score");
 const strengthText = document.getElementById("strength-text");
@@ -275,3 +275,19 @@ function updatePasswordAnalysis(password){
     updateAnalysis(password);
 
 }
+copyButton.addEventListener("click", async () => {
+
+    if(passwordInput.value === "")
+        return;
+
+    await navigator.clipboard.writeText(passwordInput.value);
+
+    copyButton.textContent = "Copied!";
+
+    setTimeout(() => {
+
+        copyButton.textContent = "Copy";
+
+    },1500);
+
+});
