@@ -48,7 +48,11 @@ passwordInput.addEventListener("input", () => {
         analysisList.innerHTML =
             "<li>🚨 This is a commonly used password. Choose a more unique password.</li>";
     }
-    
+    const pattern = detectPattern(password);
+
+    if(pattern){
+        analysisList.innerHTML += `<li>⚠ ${pattern}</li>`;
+    }
 });
 // Check Requirements
 function checkRequirements(password){
@@ -148,4 +152,19 @@ function updateRequirement(element, passed){
 
 }
 
+function detectPattern(password){
 
+    const repeatedPattern = /(.)\1{2,}/;
+    const sequentialPattern = /123|234|345|456|567|678|789|abc|bcd|cde|def|qwerty|asdf|zxcv/i;
+
+    if(repeatedPattern.test(password)){
+        return "Repeated characters detected.";
+    }
+
+    if(sequentialPattern.test(password)){
+        return "Predictable sequence detected.";
+    }
+
+    return null;
+
+}
